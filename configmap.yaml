@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: {{ .Chart.Name }}
+    labels:
+      app: {{ .Chart.Name }}
+      release: "{{ .Chart.Name }}"
+      chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+data:
+{{- range $key, $value := .Values.config }}
+  {{ $key | nindent 2 }}: {{ $value | quote }}
+{{- end }}
